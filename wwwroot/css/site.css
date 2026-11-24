@@ -1,0 +1,82 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+/* Blog : cartes d'articles, tags, commentaires */
+.grille-articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.carte-article {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.carte-article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.carte-article h2 {
+  font-size: 1.3rem;
+}
+
+.carte-article h2 a {
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+.meta {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.tag {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 999px;
+  padding: 0.15rem 0.75rem;
+  margin-right: 0.4rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.commentaire {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}

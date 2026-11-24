@@ -1,0 +1,46 @@
+﻿@model Article
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Modifier l'article";
+}
+
+<h1>Modifier l'article</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Id" type="hidden" />
+    <div class="mb-3">
+        <label asp-for="Titre" class="form-label"></label>
+        <input asp-for="Titre" class="form-control" />
+        <span asp-validation-for="Titre" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Resume" class="form-label"></label>
+        <textarea asp-for="Resume" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Resume" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DatePublication" class="form-label"></label>
+        <input asp-for="DatePublication" class="form-control" />
+        <span asp-validation-for="DatePublication" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tags</label>
+        @foreach (Tag tag in ViewBag.Tags)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="tagIds" value="@tag.Id" id="tag@(tag.Id)"
+                       checked="@Model.Tags.Any(t => t.Id == tag.Id)" />
+                <label class="form-check-label" for="tag@(tag.Id)">@tag.Nom</label>
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a asp-action="Detail" asp-route-id="@Model.Id" class="btn btn-secondary">Annuler</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

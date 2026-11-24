@@ -1,0 +1,13 @@
+﻿@model Article
+
+<article class="carte-article">
+    <h2><a asp-action="Detail" asp-route-id="@Model.Id">@Model.Titre</a></h2>
+    <p class="meta">Publié le @Model.DatePublication.ToString("d MMMM yyyy"), par @Model.Auteur?.Nom</p>
+    <p>@Model.Resume</p>
+    <p>
+        @foreach (var tag in Model.Tags)
+        {
+            <a asp-action="Index" asp-route-tag="@tag.Nom" class="tag">@tag.Nom</a>
+        }
+    </p>
+</article>

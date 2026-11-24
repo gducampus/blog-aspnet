@@ -1,0 +1,56 @@
+﻿@model Article
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = Model.Titre;
+}
+
+<h1>@Model.Titre</h1>
+<p class="meta">Publié le @Model.DatePublication.ToString("d MMMM yyyy"), par @Model.Auteur?.Nom</p>
+<p>@Model.Resume</p>
+<p>
+    @foreach (var tag in Model.Tags)
+    {
+        <a asp-action="Index" asp-route-tag="@tag.Nom" class="tag">@tag.Nom</a>
+    }
+</p>
+<p>
+    @if (User.IsInRole("Admin") || Model.Auteur?.Email == User.Identity?.Name)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Modifier</a>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Supprimer</a>
+    }
+</p>
+<a asp-action="Index">Retour aux articles</a>
+
+<h2>Commentaires (@Model.Commentaires.Count)</h2>
+
+@foreach (var commentaire in Model.Commentaires)
+{
+    <div class="commentaire">
+        <strong>@commentaire.NomAuteur</strong>, le @commentaire.Date.ToString("d MMMM yyyy")
+        <p>@commentaire.Texte</p>
+    </div>
+}
+
+<h3>Laisser un commentaire</h3>
+@if (TempData["ErreurCommentaire"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErreurCommentaire"]</div>
+}
+<form asp-action="Commenter" method="post">
+    <input type="hidden" name="ArticleId" value="@Model.Id" />
+    <div class="mb-3">
+        <label for="NomAuteur" class="form-label">Votre nom</label>
+        <input id="NomAuteur" name="NomAuteur" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="Texte" class="form-label">Commentaire</label>
+        <textarea id="Texte" name="Texte" class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Publier</button>
+</form>

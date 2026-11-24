@@ -1,0 +1,29 @@
+﻿@model List<StatAuteur>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Statistiques";
+}
+
+<h1>Statistiques des auteurs</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Auteur</th>
+            <th>Articles</th>
+            <th>Dernier article</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stat in Model)
+        {
+            <tr>
+                <td>@stat.Nom</td>
+                <td>@stat.NombreArticles</td>
+                <td>@stat.DernierArticle?.ToString("d MMMM yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
